@@ -1,0 +1,29 @@
+{
+  "name": "top-hat-bot",
+  "version": "0.0.1",
+  "description": "A discord bot for the Top Hat Engineers server",
+  "engines": {
+    "node": ">=8.1.1"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "start-dev": "nodemon ."
+  },
+  "author": {
+    "name": "Tim Howard",
+    "email": "13tim37@gmail.com"
+  },
+  "config": {
+    "prefix": "!",
+    "token": "MjQ4NTY0OTUwMTM2NjUxNzc2.Cw5ltA.oAsWR523o2u6vhhsyL94-lZI2lY"
+  },
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "gamedig": "^1.0.45",
+    "node-fetch": "^2.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
