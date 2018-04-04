@@ -10,7 +10,7 @@ const gamedig = (callback, callbackError) => {
 	Gamedig.query({
 		type: 'medievalengineers',
 		host: process.env.MEDIEVAL_DS_ADDRESS,
-		port: '27017'
+		port: process.env.MEDIEVAL_DS_PORT
 	}).then((state) => {
 		callback(state)
 	}).catch((error) => {
