@@ -1,6 +1,6 @@
 {
   "name": "top-hat-bot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A discord bot for the Top Hat Engineers server",
   "engines": {
     "node": ">=8.1.1"
@@ -15,15 +15,19 @@
     "email": "13tim37@gmail.com"
   },
   "config": {
-    "prefix": "!",
-    "token": "MjQ4NTY0OTUwMTM2NjUxNzc2.Cw5ltA.oAsWR523o2u6vhhsyL94-lZI2lY"
+    "prefix": "!"
   },
   "dependencies": {
     "discord.js": "^11.3.2",
+    "dotenv": "^5.0.1",
     "gamedig": "^1.0.45",
     "node-fetch": "^2.1.2"
   },
   "devDependencies": {
     "nodemon": "^1.17.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/13Tim37/Top-Hat-Bot.git"
   }
 }

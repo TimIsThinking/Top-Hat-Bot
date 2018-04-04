@@ -1,7 +1,23 @@
+require('dotenv').config()
 const Discord = require("discord.js")
 const fetch = require("node-fetch")
 const Gamedig = require('gamedig')
-const config = require("./package.json").config
+const package = require("./package.json")
+const config = package.config
+
+const gamedig = (callback, callbackError) => {
+
+	Gamedig.query({
+		type: 'medievalengineers',
+		host: process.env.MEDIEVAL_DS_ADDRESS,
+		port: process.env.MEDIEVAL_DS_PORT
+	}).then((state) => {
+		callback(state)
+	}).catch((error) => {
+		console.error('error', error)
+		callbackError(error)
+	});
+}
 
 const bot = new Discord.Client()
 
@@ -23,20 +39,26 @@ bot.on("message", msg => {
 		msg.reply('hai there!')
 	}
 	
-	else if (command === 'say') {
-		msg.channel.send(args.join(" "))
+	else if (command === 'version' || command === 'v') {
+		msg.channel.send(`Version: ${package.version}`)
 	}
 	
-	else if (command === 'help') {
+	else if (command === 'help' || command === 'h') {
+
+		const commands = [
+			'!help - This help menu',
+			'!hi - Hello!',
+			'!players - Get players info',
+			'!serverinfo - Display information about the server',
+			'!version - Get bot version'
+		]
+
 		msg.author.send(
 			`
-			\n**Commands**
-			\n!help - This help menu
-			\n!serverinfo - Display information about the server
-			\n!hi - Hello!
-			\n!say - Make me say things
+			**Commands**\n\n${commands.join('\n')}
 			`
 		)
+		
 		msg.reply(`check your DMs`)
 	}
 
@@ -44,13 +66,7 @@ bot.on("message", msg => {
 
 		msg.react("🎩")
 
-		Gamedig.query({
-			type: 'medievalengineers',
-			host: '188.165.229.91',
-			port: '27017'
-		}).then((state) => {
-			// console.log(state);
-
+		gamedig(state => {
 			const mods = []
 
 			for (let mod in state.raw.rules) {
@@ -83,15 +99,63 @@ bot.on("message", msg => {
 					timestamp: new Date()
 				}
 			})
-
-		}).catch((error) => {
+		}, error => {
 			console.error('error', error)
 			msg.channel.send(`**Server is offline**`).then(reply => {
 				reply.react("😭")
 			})
-		});
+		})
+	}
+
+	else if (command === 'players' || command == 'p') {
+
+		msg.react("🎩")
+
+		gamedig(state => {
+			msg.channel.send({
+				embed: {
+					author: {
+						name: `Players (${state.players.length})`,
+						icon_url: bot.user.avatarURL
+					},
+					color: 3447003,
+					fields: state.players.map(player => {
+
+						const time = player.time
+
+						const hours = ~~(time / 3600)
+						const mins = ~~((time % 3600) / 60)
+						const secs = Math.round(time % 60)
+
+						let timeString = `${time}`
+
+						timeString = hours > 0
+						? (
+							mins > 0
+							? `${hours}h ${mins}m ${secs}s`
+							: `${hours}h ${secs}s`
+						) : (
+							mins > 0
+							? `${mins}m ${secs}s`
+							: `${secs}s`
+						)
+
+						return {
+							name: `${player.name}`,
+							value: `Online for: ${timeString}`
+						}
+					}),
+					timestamp: new Date()
+				}
+			})
+		}, error => {
+			console.error('error', error)
+			msg.channel.send(`**Server is offline**`).then(reply => {
+				reply.react("😭")
+			})
+		})
 	}
 })
 
 // https://discordapp.com/oauth2/authorize?client_id=248564950136651776&scope=bot
-bot.login(config.token);
+bot.login(process.env.DISCORD_ACCESS_TOKEN);
