@@ -1,6 +1,6 @@
 {
   "name": "top-hat-bot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A discord bot for the Top Hat Engineers server",
   "engines": {
     "node": ">=8.1.1"
@@ -28,6 +28,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/13Tim37/Top-Hat-Bot.git"
+    "url": "https://github.com/13Tim37/Top-Hat-Bot"
   }
 }

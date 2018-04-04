@@ -7,6 +7,7 @@ const config = package.config
 const help = require('./src/commands/help')
 const serverInfo = require('./src/commands/serverInfo')
 const playerInfo = require('./src/commands/playerInfo')
+const suggest = require('./src/commands/suggest')
 
 const bot = new Discord.Client()
 
@@ -42,6 +43,21 @@ bot.on("message", msg => {
 
 	else if (command === 'players' || command == 'p') {
 		playerInfo(msg, bot.user.avatarURL)		
+	}
+
+	else if (command === 'github' || command === 'gh') {
+		msg.channel.send(`Github: ${package.repository.url}`)
+	}
+
+	else if (command === 'changelog' || command === 'cl' || command === 'changes') {
+		args.includes('latest') 
+		? msg.channel.send(`Latest changelog: ${package.repository.url}/releases/latest`)
+		: msg.channel.send(`Changelog: ${package.repository.url}/releases`)
+	}
+
+	else if (command === 'suggest') {
+		suggest(msg, args)
+
 	}
 })
 
