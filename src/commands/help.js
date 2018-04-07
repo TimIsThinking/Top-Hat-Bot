@@ -6,7 +6,8 @@ const commands = [
     '!players - Get players info',
     '!serverinfo - Display information about the server',
     '!suggest <SUGGESTION> - Send a suggestion for me to improve!',
-    '!version - Get bot version'
+    '!version - Get bot version',
+    '!votes - Show the vote leaderboard'
 ]
 
 const help = msg => {
