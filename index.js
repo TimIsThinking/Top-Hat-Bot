@@ -79,10 +79,6 @@ bot.on('message', msg => {
 
 	else if (command === 'suggest') {
 		suggest(msg, args)
-    }
-    
-	else if (command === 'suggest') {
-		suggest(msg, args)
 	}
 
 	else if (command === 'votes') {
