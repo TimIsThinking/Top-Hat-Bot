@@ -1,6 +1,5 @@
 require('dotenv').config()
 const Discord = require("discord.js")
-const fetch = require("node-fetch")
 const package = require("./package.json")
 const config = package.config
 
@@ -8,6 +7,7 @@ const help = require('./src/commands/help')
 const serverInfo = require('./src/commands/serverInfo')
 const playerInfo = require('./src/commands/playerInfo')
 const suggest = require('./src/commands/suggest')
+const votes = require('./src/commands/votes')
 
 const bot = new Discord.Client()
 
@@ -57,7 +57,12 @@ bot.on("message", msg => {
 
 	else if (command === 'suggest') {
 		suggest(msg, args)
+	}
 
+	else if (command === 'votes') {
+		process.env.MEDIEVAL_ENGINEERS_NET_API_KEY
+		? votes(msg, bot.user.avatarURL)
+		: msg.channel.send('The votes feature is currently disabled')
 	}
 })
 

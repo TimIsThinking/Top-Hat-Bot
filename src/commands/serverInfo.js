@@ -16,6 +16,33 @@ const serverInfo = (msg, botAvatar) => {
                 }
             }
 
+            const fields = []
+
+            fields.push({
+                name: 'Name',
+                value: `${state.name}`
+            })
+
+            fields.push(
+                state.maxplayers > 0 ? ({
+                    name: 'Players',
+                    value: `${state.raw.numplayers}/${state.maxplayers}`
+                }) : ({
+                    name: 'Status',
+                    value: 'Server is loading, check again soon ...'
+                })
+            )
+
+            fields.push({
+                name: 'Version',
+                value: `${state.raw.version}`
+            })
+
+            fields.push({
+                name: `Mods (${mods.length})`,
+                value: `${(mods.length > 1 ? `${mods.join(', ')}` : 'None')}`
+            })
+
             msg.channel.send({
                 embed: {
                     author: {
@@ -23,19 +50,7 @@ const serverInfo = (msg, botAvatar) => {
                         icon_url: botAvatar
                     },
                     color: 3447003,
-                    fields: [{
-                        name: 'Name',
-                        value: `${state.name}`
-                    },{
-                        name: 'Players',
-                        value: `${state.raw.numplayers}/${state.maxplayers}`
-                    },{
-                        name: 'Version',
-                        value: `${state.raw.version}`
-                    },{
-                        name: `Mods (${mods.length})`,
-                        value: `${(mods.length > 1 ? `${mods.join(', ')}` : 'None')}`
-                    }],
+                    fields: fields,
                     timestamp: new Date()
                 }
             })
