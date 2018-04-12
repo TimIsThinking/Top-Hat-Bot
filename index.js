@@ -19,21 +19,21 @@ bot.on("ready", () => {
 bot.on("message", msg => {
 	if (msg.author.bot) return
 	if (!msg.content.startsWith(config.prefix)) return
-	
+
 	let command = msg.content.split(" ")[0]
 	command = command.slice(config.prefix.length)
 	command = command.toLowerCase()
-	
+
 	let args = msg.content.split(" ").slice(1)
-	
+
 	if (command === 'hi') {
 		msg.reply('hai there!')
 	}
-	
+
 	else if (command === 'version' || command === 'v') {
 		msg.channel.send(`Version: ${package.version}`)
 	}
-	
+
 	else if (command === 'help' || command === 'h') {
 		help(msg)
 	}
@@ -43,7 +43,7 @@ bot.on("message", msg => {
 	}
 
 	else if (command === 'players' || command == 'p') {
-		playerInfo(msg, bot.user.avatarURL)		
+		playerInfo(msg, bot.user.avatarURL)
 	}
 
 	else if (command === 'github' || command === 'gh') {
@@ -51,7 +51,7 @@ bot.on("message", msg => {
 	}
 
 	else if (command === 'changelog' || command === 'cl' || command === 'changes') {
-		args.includes('latest') 
+		args.includes('latest')
 		? msg.channel.send(`Latest changelog: ${package.repository.url}/releases/latest`)
 		: msg.channel.send(`Changelog: ${package.repository.url}/releases`)
 	}

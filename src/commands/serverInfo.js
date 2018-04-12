@@ -43,6 +43,13 @@ const serverInfo = (msg, botAvatar) => {
                 value: `${(mods.length > 1 ? `${mods.join(', ')}` : 'None')}`
             })
 
+            state.maxplayers > 0 && (
+                fields.push({
+                    name: `Connect`,
+                    value: `steam://connect/${process.env.MEDIEVAL_DS_ADDRESS}:${process.env.MEDIEVAL_DS_PORT}`
+                })
+            )
+
             msg.channel.send({
                 embed: {
                     author: {
