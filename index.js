@@ -8,6 +8,7 @@ const serverInfo = require('./src/commands/serverInfo')
 const playerInfo = require('./src/commands/playerInfo')
 const suggest = require('./src/commands/suggest')
 const votes = require('./src/commands/votes')
+const poll = require('./src/commands/poll')
 
 const bot = new Discord.Client()
 
@@ -63,6 +64,10 @@ bot.on("message", msg => {
 		process.env.MEDIEVAL_ENGINEERS_NET_API_KEY
 		? votes(msg, bot.user.avatarURL)
 		: msg.channel.send('The votes feature is currently disabled')
+	}
+
+	else if (command === 'poll') {
+		poll(bot, msg, args)
 	}
 })
 
