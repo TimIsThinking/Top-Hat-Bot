@@ -52,10 +52,7 @@ const serverInfo = (msg, botAvatar) => {
 
             msg.channel.send({
                 embed: {
-                    author: {
-                        name: 'Server info',
-                        icon_url: botAvatar
-                    },
+                    title: "📡 Server Info 📡",
                     color: 3447003,
                     fields: fields,
                     timestamp: new Date()

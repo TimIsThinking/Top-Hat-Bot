@@ -1,6 +1,6 @@
 {
   "name": "top-hat-bot",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A discord bot for the Top Hat Engineers server",
   "engines": {
     "node": ">=8.1.1"
@@ -18,7 +18,7 @@
     "prefix": "!"
   },
   "dependencies": {
-    "discord.js": "^11.3.2",
+    "discord.js": "^11.4.2",
     "dotenv": "^5.0.1",
     "gamedig": "^1.0.45",
     "node-fetch": "^2.1.2"
