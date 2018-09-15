@@ -116,5 +116,9 @@ bot.on('error', err => {
 	console.log('Error', err)
 })
 
+bot.on('error', err => {
+	console.log('Error', err)
+})
+
 // https://discordapp.com/oauth2/authorize?client_id=248564950136651776&scope=bot
 bot.login(process.env.DISCORD_ACCESS_TOKEN);
