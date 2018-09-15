@@ -30,9 +30,10 @@ class pollTable {
 
     get render() {
         const percentage = this.total > 0 ? Math.round((this.positiveVotes / this.total) * 100) : 50
-        const table = `[${Array(Math.round(percentage/5)).join('|')}${Array(Math.round(20 - (percentage / 5))).join(' ')}] ${percentage}%`
+        const table = `[${Array(Math.round(percentage/(10/3))).join('≡')}${Array(Math.round(30 - (percentage / (10/3)))).join(' ')}] ${percentage}%`
         return (
-            this.title
+            '**POLL**\n\n'
+            + this.title
             + (
                 this.total > 0 ? (
                     '```'

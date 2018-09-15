@@ -12,11 +12,11 @@ const poll = require('./src/commands/poll')
 
 const bot = new Discord.Client()
 
-bot.on("ready", () => {
+bot.on('ready', () => {
 	console.log(`${bot.user.username} v${package.version} is ready!`)
 })
 
-bot.on("message", msg => {
+bot.on('message', msg => {
 	if (msg.author.bot) return
 	if (!msg.content.startsWith(config.prefix)) return
 
@@ -69,6 +69,10 @@ bot.on("message", msg => {
 	else if (command === 'poll') {
 		poll(bot, msg, args)
 	}
+})
+
+bot.on('error', err => {
+	console.log('Error', err)
 })
 
 // https://discordapp.com/oauth2/authorize?client_id=248564950136651776&scope=bot
