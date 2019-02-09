@@ -16,26 +16,45 @@ const serverInfo = (msg, botAvatar) => {
                 }
             }
 
+            const fields = []
+
+            fields.push({
+                name: 'Name',
+                value: `${state.name}`
+            })
+
+            fields.push(
+                state.maxplayers > 0 ? ({
+                    name: 'Players',
+                    value: `${state.raw.numplayers}/${state.maxplayers}`
+                }) : ({
+                    name: 'Status',
+                    value: 'Server is loading, check again soon ...'
+                })
+            )
+
+            fields.push({
+                name: 'Version',
+                value: `${state.raw.version}`
+            })
+
+            fields.push({
+                name: `Mods (${mods.length})`,
+                value: `${(mods.length > 1 ? `${mods.join(', ')}` : 'None')}`
+            })
+
+            state.maxplayers > 0 && (
+                fields.push({
+                    name: `Connect`,
+                    value: `steam://connect/${process.env.MEDIEVAL_DS_ADDRESS}:${process.env.MEDIEVAL_DS_PORT}`
+                })
+            )
+
             msg.channel.send({
                 embed: {
-                    author: {
-                        name: 'Server info',
-                        icon_url: botAvatar
-                    },
+                    title: "📡 Server Info 📡",
                     color: 3447003,
-                    fields: [{
-                        name: 'Name',
-                        value: `${state.name}`
-                    },{
-                        name: 'Players',
-                        value: `${state.raw.numplayers}/${state.maxplayers}`
-                    },{
-                        name: 'Version',
-                        value: `${state.raw.version}`
-                    },{
-                        name: `Mods (${mods.length})`,
-                        value: `${(mods.length > 1 ? `${mods.join(', ')}` : 'None')}`
-                    }],
+                    fields: fields,
                     timestamp: new Date()
                 }
             })
