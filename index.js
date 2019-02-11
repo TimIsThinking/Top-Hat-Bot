@@ -9,7 +9,10 @@ const playerInfo = require('./src/commands/playerInfo')
 const suggest = require('./src/commands/suggest')
 const votes = require('./src/commands/votes')
 const poll = require('./src/commands/poll')
+
 const chat = require('./src/commands/chat')
+const claims = require('./src/commands/claims')
+const factions = require('./src/commands/factions')
 
 const bot = new Discord.Client()
 
@@ -87,6 +90,14 @@ bot.on('message', msg => {
     
     else if (command === 'chat') {
 		chat(msg, args)
+    }
+    
+    else if (command === 'claims') {
+		claims(msg, args)
+    }
+    
+    else if (command === 'factions') {
+		factions(msg, args)
 	}
 })
 

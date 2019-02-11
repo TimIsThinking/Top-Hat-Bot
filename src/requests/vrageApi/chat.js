@@ -6,8 +6,6 @@ const moment = require('moment')
 
 const getChat = () => {
 
-    let chatData;
-
     return fetch(`http://${process.env.MEDIEVAL_DS_ADDRESS}:${process.env.MEDIEVAL_API_PORT}/vrageremote/v1/session/gamechat/world`, {
         method: 'GET',
         headers: {
@@ -23,8 +21,7 @@ const getChat = () => {
 
 const sendChat = (chat) => {
 
-    const today = moment();
-    const date = `${today.format('ddd, DD MMM YYYY HH:mm:ss')} GMT`
+    const date = `${moment().format('ddd, DD MMM YYYY HH:mm:ss')} GMT`
     const authCode = generateAuthorization(date, process.env.MEDIEVAL_API_KEY)
 
     const data = JSON.stringify({
