@@ -9,10 +9,10 @@ const generateNonce = (length) => {
     return text
 }
 
-const generateAuthorization = (date, apiKey) => {
+const generateAuthorization = (route, date, apiKey) => {
     
     const nonce = generateNonce(9)
-    const message = (`/vrageremote/v1/session/gamechat\r\n${nonce}\r\n${date}\r\n`)
+    const message = (`${route}\r\n${nonce}\r\n${date}\r\n`)
     const key = Buffer.from(apiKey, 'base64')
     const hash = crypto.createHmac('sha1', key).update(message).digest('base64')
     const authorization = `${nonce}:${hash}`
