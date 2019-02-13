@@ -1,6 +1,6 @@
 const fetch = require("node-fetch")
 
-const votes = (msg, botAvatar) => {
+const votes = (msg) => {
     msg.react('🎩')
 
     fetch(`https://medieval-engineers.net/api/?object=servers&element=voters&key=${process.env.MEDIEVAL_ENGINEERS_NET_API_KEY}&month=current&format=json`)
@@ -30,7 +30,6 @@ const votes = (msg, botAvatar) => {
                 ),
                 author: {
                     name: `Votes leaderboard`,
-                    icon_url: botAvatar
                 },
                 color: 3447003,
                 timestamp: new Date()

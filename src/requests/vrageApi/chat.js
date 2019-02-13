@@ -19,6 +19,25 @@ const getChat = () => {
 
 }
 
+const getAllChat = () => {
+
+    const date = `${moment().format('ddd, DD MMM YYYY HH:mm:ss')} GMT`
+    const authCode = generateAuthorization(date, process.env.MEDIEVAL_API_KEY)
+
+    return fetch(`http://${process.env.MEDIEVAL_DS_ADDRESS}:${process.env.MEDIEVAL_API_PORT}/vrageremote/v1/session/gamechat`, {
+        method: 'GET',
+        headers: {
+            'Date': date,
+            'Accept': 'application/json',
+            'Authorization': authCode
+        }
+    })
+    .then(res => res.json())
+    .then(json => {
+       return(json.Data)
+    });
+}
+
 const sendChat = (chat) => {
 
     const date = `${moment().format('ddd, DD MMM YYYY HH:mm:ss')} GMT`
@@ -38,9 +57,9 @@ const sendChat = (chat) => {
             'Authorization': authCode,
             'Content-Type': 'application/json'
         }
-    }).then(res => console.log(res))
+    })
 
 
 }
 
-module.exports = [getChat, sendChat];
+module.exports = [getChat, getAllChat, sendChat];

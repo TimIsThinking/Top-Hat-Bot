@@ -14,6 +14,8 @@ const chat = require('./src/commands/chat')
 const claims = require('./src/commands/claims')
 const factions = require('./src/commands/factions')
 
+const checkIfAdmin = require('./src/middleware/authorization')
+
 const bot = new Discord.Client()
 
 bot.on('ready', () => {
@@ -43,11 +45,11 @@ bot.on('message', msg => {
 	}
 
 	else if (command === 'serverinfo' || command == 'si') {
-		serverInfo(msg, bot.user.avatarURL)
+		serverInfo(msg)
 	}
 
 	else if (command === 'players' || command == 'p') {
-		playerInfo(msg, bot.user.avatarURL)
+		playerInfo(msg)
 	}
 
 	else if (command === 'github' || command === 'gh') {
@@ -67,7 +69,7 @@ bot.on('message', msg => {
 	else if (command === 'changelog' || command === 'cl' || command === 'changes') {
 		args.includes('latest') 
 		? msg.channel.send(`Latest changelog: ${package.repository.url}/releases/latest`)
-		: msg.channel.send(`Changelog: ${package.repository.url}/releases`)
+        : msg.channel.send(`Changelog: ${package.repository.url}/releases`)
 	}
 
 	else if (command === 'suggest') {
@@ -80,7 +82,7 @@ bot.on('message', msg => {
 
 	else if (command === 'votes') {
 		process.env.MEDIEVAL_ENGINEERS_NET_API_KEY
-		? votes(msg, bot.user.avatarURL)
+		? votes(msg)
 		: msg.channel.send('The votes feature is currently disabled')
 	}
 
@@ -89,15 +91,15 @@ bot.on('message', msg => {
     }
     
     else if (command === 'chat') {
-		chat(msg, args)
+		checkIfAdmin(msg, () => chat(msg, args))
     }
     
     else if (command === 'claims') {
-		claims(msg, args)
+		checkIfAdmin(msg, () => claims(msg, args))
     }
     
     else if (command === 'factions') {
-		factions(msg, args)
+		checkIfAdmin(msg, () => factions(msg, args))
 	}
 })
 

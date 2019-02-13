@@ -1,8 +1,9 @@
 const gamedig = require('../utils/gamedig')
 const topHatEngineersConfig = require('../requests/gamedig/topHatEngineers')
 
-const serverInfo = (msg, botAvatar) => {
+const serverInfo = (msg) => {
     msg.react("🎩")
+    msg.channel.startTyping();
 
     gamedig(
         topHatEngineersConfig,
@@ -66,6 +67,8 @@ const serverInfo = (msg, botAvatar) => {
             })
         }
     )
+
+    msg.channel.stopTyping();
 }
 
 module.exports = serverInfo
