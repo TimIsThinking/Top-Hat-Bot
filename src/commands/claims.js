@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const moment = require('moment')
-const [getClaims] = require('../requests/vrageApi/sessionController/session')
+const [getClaims] = require('../requests/vrageApi/session')
 
 const claims = (msg, args) => {
     msg.react('🎩')

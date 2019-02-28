@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const generateAuthorization = require('../authorization')
+const generateAuthorization = require('./authorization')
 const moment = require('moment')
 
 // Session Controller
@@ -19,7 +19,6 @@ const getClaims = () => {
     .then(json => {
        return(json.Data)
     });
-
 }
 
 module.exports = [getClaims];

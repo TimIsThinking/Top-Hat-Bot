@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const generateAuthorization = require('../authorization')
+const generateAuthorization = require('./authorization')
 const moment = require('moment')
 
 // Faction Controller

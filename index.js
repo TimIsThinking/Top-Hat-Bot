@@ -3,6 +3,9 @@ const Discord = require("discord.js")
 const package = require("./package.json")
 const config = package.config
 
+const gamedig = require('./src/utils/gamedig')
+const topHatEngineersConfig = require('./src/requests/gamedig/topHatEngineers')
+
 const help = require('./src/commands/help')
 const serverInfo = require('./src/commands/serverInfo')
 const playerInfo = require('./src/commands/playerInfo')
@@ -13,13 +16,22 @@ const poll = require('./src/commands/poll')
 const chat = require('./src/commands/chat')
 const claims = require('./src/commands/claims')
 const factions = require('./src/commands/factions')
+// const checkClaims = require('./src/commands/checkclaim')
 
 const checkIfAdmin = require('./src/middleware/authorization')
 
 const bot = new Discord.Client()
 
 bot.on('ready', () => {
-	console.log(`${bot.user.username} v${package.version} is ready!`)
+    console.log(`${bot.user.username} v${package.version} is ready!`)
+
+    gamedig(
+        topHatEngineersConfig,
+        state => {
+            bot.user.setActivity(`Top Hat Engineers ${state.raw.numplayers}/${state.maxplayers}`, {type: 'PLAYING'} )
+    }, error => {
+        bot.user.setActivity('Server Offline', {type: 'WATCHING'})
+    })
 })
 
 bot.on('message', msg => {
@@ -100,7 +112,15 @@ bot.on('message', msg => {
     
     else if (command === 'factions') {
 		checkIfAdmin(msg, () => factions(msg, args))
-	}
+    }
+    
+    // else if (command === 'checkclaims') {
+	// 	checkClaims(bot, msg, args)
+    // }
+
+    // else if (command === 'getClaims') {
+	// 	checkIfAdmin(msg, () => getClaims(msg, args))
+    // }
 })
 
 bot.on('error', err => {
