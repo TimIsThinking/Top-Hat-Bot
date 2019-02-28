@@ -6,10 +6,29 @@ const Server = mongoose.model('Server', {
         required: true,
         unique: true
     },
-    shouldJoin: {
-        type: Boolean,
-        required: true,
-        default: true
+    game: {
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    port: {
+        type: String,
+        required: true
+    },
+    apiAddress: {
+        type: String,
+        required: false
+    },
+    apiPort: {
+        type: String,
+        required: false
+    },
+    apiKey: {
+        type: String,
+        required: false
     }
 });
 

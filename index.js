@@ -19,6 +19,7 @@ const factions = require('./src/commands/factions')
 // const checkClaims = require('./src/commands/checkclaim')
 
 const checkIfAdmin = require('./src/middleware/authorization')
+const [createServer, listServers] = require('./src/commands/servers')
 
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
 
@@ -98,6 +99,7 @@ bot.on('message', msg => {
 
 	else if (command === 'poll') {
 		poll(bot, msg, args)
+<<<<<<< HEAD
   }
     
   else if (command === 'chat') {
@@ -123,6 +125,17 @@ bot.on('message', msg => {
 
 bot.on('error', err => {
 	console.log('Error', err)
+=======
+    }
+    
+    else if (command === 'createserver') {
+		createServer(msg, args)
+    }
+    
+    else if (command === 'listservers') {
+		listServers(msg)
+	}
+>>>>>>> Add commands to interact with database functions
 })
 
 bot.on('error', err => {
