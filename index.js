@@ -10,7 +10,7 @@ const playerInfo = require('./src/commands/playerInfo')
 const suggest = require('./src/commands/suggest')
 const votes = require('./src/commands/votes')
 const poll = require('./src/commands/poll')
-
+const [createServer, listServers] = require('./src/commands/servers')
 
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
 
@@ -78,6 +78,14 @@ bot.on('message', msg => {
 
 	else if (command === 'poll') {
 		poll(bot, msg, args)
+    }
+    
+    else if (command === 'createserver') {
+		createServer(msg, args)
+    }
+    
+    else if (command === 'listservers') {
+		listServers(msg)
 	}
 })
 
