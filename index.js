@@ -1,5 +1,6 @@
 require('dotenv').config()
 const Discord = require("discord.js")
+const mongoose = require("mongoose")
 const package = require("./package.json")
 const config = package.config
 
@@ -18,6 +19,14 @@ const factions = require('./src/commands/factions')
 // const checkClaims = require('./src/commands/checkclaim')
 
 const checkIfAdmin = require('./src/middleware/authorization')
+
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
+
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Connected to DB!')
+});
 
 const bot = new Discord.Client()
 
