@@ -1,7 +1,7 @@
 const gamedig = require('../utils/gamedig')
 const topHatEngineersConfig = require('../requests/gamedig/topHatEngineers')
 
-const playerInfo = (msg, botAvatar) => {
+const playerInfo = (msg) => {
     msg.react("🎩")
 
     gamedig(
@@ -11,7 +11,6 @@ const playerInfo = (msg, botAvatar) => {
                 embed: {
                     author: {
                         name: `Players (${state.players.length})`,
-                        icon_url: botAvatar
                     },
                     color: 3447003,
                     fields: state.players.map(player => {

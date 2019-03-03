@@ -1,8 +1,17 @@
 const gamedig = require('../utils/gamedig')
 const topHatEngineersConfig = require('../requests/gamedig/topHatEngineers')
+const [getServer] = require('../requests/vrageApi/server')
 
-const serverInfo = (msg, botAvatar) => {
+const serverInfo = (msg) => {
     msg.react("🎩")
+    msg.channel.startTyping();
+
+    // getServer().then(data => {
+    //     const simSpeed = data.SimSpeed
+    //     const upTime = `${Math.floor(data.TotalTime / 3600)}h ${Math.floor(data.TotalTime / 60 % 60)}m ${data.TotalTime % 60}s`
+
+    //     console.log(data)
+    // })
 
     gamedig(
         topHatEngineersConfig,
@@ -66,6 +75,8 @@ const serverInfo = (msg, botAvatar) => {
             })
         }
     )
+
+    msg.channel.stopTyping();
 }
 
 module.exports = serverInfo
