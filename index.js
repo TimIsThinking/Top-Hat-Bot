@@ -79,10 +79,6 @@ bot.on('message', msg => {
 
 	else if (command === 'suggest') {
 		suggest(msg, args)
-    }
-    
-	else if (command === 'suggest') {
-		suggest(msg, args)
 	}
 
 	else if (command === 'votes') {
@@ -114,6 +110,10 @@ bot.on('message', msg => {
   // else if (command === 'getClaims') {
 	// 	checkIfAdmin(msg, () => getClaims(msg, args))
   // }
+})
+
+bot.on('error', err => {
+	console.log('Error', err)
 })
 
 bot.on('error', err => {
