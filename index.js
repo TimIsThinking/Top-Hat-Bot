@@ -47,7 +47,7 @@ bot.on('message', msg => {
 	let args = msg.content.split(" ").slice(1)
 
 	if (command === 'hi') {
-		msg.reply('hai there!')
+		msg.reply('hai there! :wave: ')
 	}
 
 	else if (command === 'version' || command === 'v') {
@@ -90,9 +90,9 @@ bot.on('message', msg => {
 		poll(bot, msg, args)
   }
     
-  else if (command === 'chat') {
-		checkIfAdmin(msg, () => chat(msg, args))
-  }
+  // else if (command === 'chat') {
+	// 	checkIfAdmin(msg, () => chat(msg, args))
+  // }
     
   else if (command === 'claims') {
 		checkIfAdmin(msg, () => claims(msg, args))
@@ -110,9 +110,9 @@ bot.on('message', msg => {
 	// 	checkIfAdmin(msg, () => getClaims(msg, args))
 	// }
 	
-	else if (command === 'createserver') {
-		checkIfAdmin(msg, () => createServer(msg, args))
-  }
+	// else if (command === 'createserver') {
+	// 	checkIfAdmin(msg, () => createServer(msg, args))
+  // }
     
   else if (command === 'listservers') {
 		checkIfAdmin(msg, () => listServers(msg))
