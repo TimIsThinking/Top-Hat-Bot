@@ -12,16 +12,6 @@ const playerInfo = require('./src/commands/playerInfo')
 const suggest = require('./src/commands/suggest')
 const votes = require('./src/commands/votes')
 const poll = require('./src/commands/poll')
-const [createServer, listServers] = require('./src/commands/servers')
-
-mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
-
-const db = mongoose.connection
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log('Connected to DB!')
-});
-
 const chat = require('./src/commands/chat')
 const claims = require('./src/commands/claims')
 const factions = require('./src/commands/factions')
