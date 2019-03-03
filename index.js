@@ -3,8 +3,7 @@ const Discord = require("discord.js")
 const package = require("./package.json")
 const config = package.config
 
-const gamedig = require('./src/utils/gamedig')
-const topHatEngineersConfig = require('./src/requests/gamedig/topHatEngineers')
+const activityChecker = require('./src/utils/activityChecker')
 
 const help = require('./src/commands/help')
 const serverInfo = require('./src/commands/serverInfo')
@@ -25,13 +24,7 @@ const bot = new Discord.Client()
 bot.on('ready', () => {
     console.log(`${bot.user.username} v${package.version} is ready!`)
 
-    gamedig(
-        topHatEngineersConfig,
-        state => {
-            bot.user.setActivity(`Top Hat Engineers ${state.raw.numplayers}/${state.maxplayers}`, {type: 'PLAYING'} )
-    }, error => {
-        bot.user.setActivity('Server Offline', {type: 'WATCHING'})
-    })
+    activityChecker(bot)
 })
 
 bot.on('message', msg => {
