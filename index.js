@@ -121,11 +121,11 @@ bot.on('message', msg => {
 	// }
 	
 	else if (command === 'createserver') {
-		createServer(msg, args)
+		checkIfAdmin(msg, () => createServer(msg, args))
   }
     
   else if (command === 'listservers') {
-		listServers(msg)
+		checkIfAdmin(msg, () => listServers(msg))
 	}
 })
 
