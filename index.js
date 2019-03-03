@@ -47,7 +47,7 @@ bot.on('message', msg => {
 	let args = msg.content.split(" ").slice(1)
 
 	if (command === 'hi') {
-		msg.reply('hai there! :wave: ')
+		msg.reply('hai there! :wave:')
 	}
 
 	else if (command === 'version' || command === 'v') {
@@ -87,7 +87,7 @@ bot.on('message', msg => {
 	}
 
 	else if (command === 'poll') {
-		poll(bot, msg, args)
+		checkIfAdmin(poll(bot, msg, args))
   }
     
   // else if (command === 'chat') {
