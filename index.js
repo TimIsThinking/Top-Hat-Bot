@@ -12,6 +12,15 @@ const playerInfo = require('./src/commands/playerInfo')
 const suggest = require('./src/commands/suggest')
 const votes = require('./src/commands/votes')
 const poll = require('./src/commands/poll')
+const [createServer, listServers] = require('./src/commands/servers')
+
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
+
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Connected to DB!')
+});
 
 const chat = require('./src/commands/chat')
 const claims = require('./src/commands/claims')
@@ -99,7 +108,6 @@ bot.on('message', msg => {
 
 	else if (command === 'poll') {
 		poll(bot, msg, args)
-<<<<<<< HEAD
   }
     
   else if (command === 'chat') {
@@ -120,22 +128,15 @@ bot.on('message', msg => {
 
   // else if (command === 'getClaims') {
 	// 	checkIfAdmin(msg, () => getClaims(msg, args))
-  // }
-})
-
-bot.on('error', err => {
-	console.log('Error', err)
-=======
-    }
-    
-    else if (command === 'createserver') {
+	// }
+	
+	else if (command === 'createserver') {
 		createServer(msg, args)
-    }
+  }
     
-    else if (command === 'listservers') {
+  else if (command === 'listservers') {
 		listServers(msg)
 	}
->>>>>>> Add commands to interact with database functions
 })
 
 bot.on('error', err => {
