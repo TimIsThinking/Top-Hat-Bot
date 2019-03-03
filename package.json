@@ -21,6 +21,7 @@
     "discord.js": "^11.4.2",
     "dotenv": "^5.0.1",
     "gamedig": "^1.0.45",
+    "moment": "^2.24.0",
     "node-fetch": "^2.1.2"
   },
   "devDependencies": {
