@@ -1,6 +1,6 @@
 {
   "name": "top-hat-bot",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A discord bot for the Top Hat Engineers server",
   "engines": {
     "node": ">=8.1.1"

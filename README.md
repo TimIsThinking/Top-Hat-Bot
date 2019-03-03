@@ -13,10 +13,12 @@ Create a .env file in your project directory and setup environment variables
 
 ```
 DISCORD_ACCESS_TOKEN:             Your discord bot access token, you can create a bot at https://discordapp.com/developers/applications/me/create
-MEDIEVAL_DS_ADDRESS:              IP Address of your medieval engineers server
-MEDIEVAL_DS_PORT:                 Port of your medieval engineers server
-MEDIEVAL_ENGINEERS_NET_API_KEY=   (Optional) Your medieval-engineers.net server api key
-MEDIEVAL_ENGINEERS_NET_SERVER_ID= (Optional) Your medieval-engineers.net server id
+MEDIEVAL_DS_ADDRESS:              IP Address of your Medieval Engineers server
+MEDIEVAL_DS_PORT:                 Port of your Medieval Engineers server
+MEDIEVAL_API_PORT:                Port of your Medieval Engineers API
+MEDIEVAL_ENGINEERS_NET_API_KEY:   (Optional) Your medieval-engineers.net server api key
+MEDIEVAL_ENGINEERS_NET_SERVER_ID: (Optional) Your medieval-engineers.net server id
+MONGODB_URL:                      MongoDB database connection url (srv)
 ```
 
 ## Install
@@ -24,6 +26,8 @@ MEDIEVAL_ENGINEERS_NET_SERVER_ID= (Optional) Your medieval-engineers.net server 
 Clone the repository
 
 `git clone git@github.com:13Tim37/Top-Hat-Bot.git`
+
+Set up environment variables
 
 Install packages
 
