@@ -93,27 +93,27 @@ bot.on('message', msg => {
 
 	else if (command === 'poll') {
 		poll(bot, msg, args)
-    }
+  }
     
-    else if (command === 'chat') {
+  else if (command === 'chat') {
 		checkIfAdmin(msg, () => chat(msg, args))
-    }
+  }
     
-    else if (command === 'claims') {
+  else if (command === 'claims') {
 		checkIfAdmin(msg, () => claims(msg, args))
-    }
+  }
     
-    else if (command === 'factions') {
+  else if (command === 'factions') {
 		checkIfAdmin(msg, () => factions(msg, args))
-    }
+  }
     
-    // else if (command === 'checkclaims') {
+  // else if (command === 'checkclaims') {
 	// 	checkClaims(bot, msg, args)
-    // }
+  // }
 
-    // else if (command === 'getClaims') {
+  // else if (command === 'getClaims') {
 	// 	checkIfAdmin(msg, () => getClaims(msg, args))
-    // }
+  // }
 })
 
 bot.on('error', err => {
