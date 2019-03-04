@@ -59,7 +59,7 @@ bot.on('message', msg => {
 	}
 
 	else if (command === 'serverinfo' || command == 'si') {
-		serverInfo(msg)
+		serverInfo(msg, args)
 	}
 
 	else if (command === 'players' || command == 'p') {

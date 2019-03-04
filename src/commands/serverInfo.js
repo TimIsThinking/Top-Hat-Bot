@@ -1,8 +1,9 @@
 const gamedig = require('../utils/gamedig')
 const topHatEngineersConfig = require('../requests/gamedig/topHatEngineers')
-const [getServer] = require('../requests/vrageApi/server')
+const {getServer} = require('../requests/vrageApi/server')
+const {getServerByName} = require('../../api/controllers/server')
 
-const serverInfo = (msg) => {
+const serverInfo = (msg, args) => {
     msg.react("🎩")
     msg.channel.startTyping();
 
@@ -13,68 +14,79 @@ const serverInfo = (msg) => {
     //     console.log(data)
     // })
 
-    gamedig(
-        topHatEngineersConfig,
-        state => {
-            const mods = []
-
-            for (let mod in state.raw.rules) {
-
-                if (mod !== 'mods') {
-                    mods.push(state.raw.rules[mod])
+    getServerByName(args.join(' '))
+    .then(server => {
+        console.log('server', server)
+        return server
+    })
+    .then(server => {
+        gamedig({
+                type: 'medievalengineers',
+                host: server.address,
+                port: server.port
+            },
+            state => {
+                const mods = []
+    
+                for (let mod in state.raw.rules) {
+    
+                    if (mod !== 'mods') {
+                        mods.push(state.raw.rules[mod])
+                    }
                 }
-            }
-
-            const fields = []
-
-            fields.push({
-                name: 'Name',
-                value: `${state.name}`
-            })
-
-            fields.push(
-                state.maxplayers > 0 ? ({
-                    name: 'Players',
-                    value: `${state.raw.numplayers}/${state.maxplayers}`
-                }) : ({
-                    name: 'Status',
-                    value: 'Server is loading, check again soon ...'
-                })
-            )
-
-            fields.push({
-                name: 'Version',
-                value: `${state.raw.version}`
-            })
-
-            fields.push({
-                name: `Mods (${mods.length})`,
-                value: `${(mods.length > 1 ? `${mods.join(', ')}` : 'None')}`
-            })
-
-            state.maxplayers > 0 && (
+    
+                const fields = []
+    
                 fields.push({
-                    name: `Connect`,
-                    value: `steam://connect/${process.env.MEDIEVAL_DS_ADDRESS}:${process.env.MEDIEVAL_DS_PORT}`
+                    name: 'Name',
+                    value: `${state.name}`
                 })
-            )
-
-            msg.channel.send({
-                embed: {
-                    title: "📡 Server Info 📡",
-                    color: 3447003,
-                    fields: fields,
-                    timestamp: new Date()
-                }
-            })
-        },
-        error => {
-            console.error('error', error)
-            msg.channel.send(`**Server is offline**`).then(reply => {
-                reply.react("😭")
-            })
-        }
-    )
+    
+                fields.push(
+                    state.maxplayers > 0 ? ({
+                        name: 'Players',
+                        value: `${state.raw.numplayers}/${state.maxplayers}`
+                    }) : ({
+                        name: 'Status',
+                        value: 'Server is loading, check again soon ...'
+                    })
+                )
+    
+                fields.push({
+                    name: 'Version',
+                    value: `${state.raw.version}`
+                })
+    
+                fields.push({
+                    name: `Mods (${mods.length})`,
+                    value: `${(mods.length > 1 ? `${mods.join(', ')}` : 'None')}`
+                })
+    
+                state.maxplayers > 0 && (
+                    fields.push({
+                        name: `Connect`,
+                        value: `steam://connect/${process.env.MEDIEVAL_DS_ADDRESS}:${process.env.MEDIEVAL_DS_PORT}`
+                    })
+                )
+    
+                msg.channel.send({
+                    embed: {
+                        title: "📡 Server Info 📡",
+                        color: 3447003,
+                        fields: fields,
+                        timestamp: new Date()
+                    }
+                })
+            },
+            error => {
+                console.error('error', error)
+                msg.channel.send(`**Server is offline**`).then(reply => {
+                    reply.react("😭")
+                })
+            }
+        )
+    })
+    
 
     msg.channel.stopTyping();
 }
