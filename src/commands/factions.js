@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 const moment = require('moment')
 const [getFactions, getFaction] = require('../requests/vrageApi/faction')
 
-const factions = (msg, args) => {
+const factions = async (msg, args) => {
     msg.react('🎩')
 
     if (args.length > 0) {

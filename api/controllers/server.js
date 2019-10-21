@@ -21,10 +21,20 @@ createServer = (name, game, address, port, apiAddress, apiPort, apiKey) => {
     })
 }
 
-getServer = (id) => {
+getServer = id => {
     Server.findOne({ _id: id }, (err, server) => {
         if (err) return {
           message: "No server exists with this ID."
+        };
+
+        return server;
+    })
+}
+
+getServerByName = name => {
+    return Server.findOne({ name: new RegExp(`^${name}$`, 'i')  }, (err, server) => {
+        if (err) return {
+            message: "Error finding server"
         };
 
         return server;
@@ -46,5 +56,6 @@ getServers = () => {
 module.exports = {
     createServer,
     getServer,
+    getServerByName,
     getServers
 }

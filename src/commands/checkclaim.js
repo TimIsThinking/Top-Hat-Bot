@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 const moment = require('moment')
 const [getClaims, getPlayerClaims] = require('../requests/vrageApi/claims')
 
-const checkClaims = (bot, msg, args) => {
+const checkClaims = async (bot, msg, args) => {
     msg.react('🎩')
 
     // getPlayerClaims().then(data => {

@@ -7,7 +7,7 @@ const moment = require('moment')
 
 // Factions
 
-const getFactions = () => {
+const getFactions = async () => {
 
     return fetch(`http://${process.env.MEDIEVAL_DS_ADDRESS}:${process.env.MEDIEVAL_API_PORT}/vrageremote/v1/session/factions`, {
         method: 'GET',
@@ -22,7 +22,7 @@ const getFactions = () => {
 
 }
 
-const getFaction = (tag) => {
+const getFaction = async tag => {
 
     return fetch(`http://${process.env.MEDIEVAL_DS_ADDRESS}:${process.env.MEDIEVAL_API_PORT}/vrageremote/v1/session/factions/${tag}`, {
         method: 'GET',

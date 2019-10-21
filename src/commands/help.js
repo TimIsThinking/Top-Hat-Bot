@@ -10,7 +10,7 @@ const commands = [
     '!votes - Show the vote leaderboard'
 ]
 
-const help = msg => {
+const help = async msg => {
     msg.author.send(
         `
         **Commands**\n\n${commands.join('\n')}

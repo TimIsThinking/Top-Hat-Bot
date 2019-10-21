@@ -1,6 +1,6 @@
 const fetch = require("node-fetch")
 
-const votes = (msg) => {
+const votes = async msg => {
     msg.react('🎩')
 
     fetch(`https://medieval-engineers.net/api/?object=servers&element=voters&key=${process.env.MEDIEVAL_ENGINEERS_NET_API_KEY}&month=current&format=json`)

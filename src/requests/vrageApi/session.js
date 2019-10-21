@@ -7,7 +7,7 @@ const moment = require('moment')
 
 // Claims
 
-const getClaims = () => {
+const getClaims = async () => {
 
     return fetch(`http://${process.env.MEDIEVAL_DS_ADDRESS}:${process.env.MEDIEVAL_API_PORT}/vrageremote/v1/session/claims`, {
         method: 'GET',
@@ -21,4 +21,4 @@ const getClaims = () => {
     });
 }
 
-module.exports = [getClaims];
+module.exports = getClaims;

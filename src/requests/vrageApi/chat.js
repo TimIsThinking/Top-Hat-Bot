@@ -4,7 +4,7 @@ const moment = require('moment')
 
 // Chat Controller
 
-const getChat = () => {
+const getChat = async () => {
 
     return fetch(`http://${process.env.MEDIEVAL_DS_ADDRESS}:${process.env.MEDIEVAL_API_PORT}/vrageremote/v1/session/gamechat/world`, {
         method: 'GET',
@@ -19,9 +19,9 @@ const getChat = () => {
 
 }
 
-const getAllChat = () => {
+const getAllChat = async () => {
 
-    const date = `${moment().format('ddd, DD MMM YYYY HH:mm:ss')} GMT`
+    const date = `${moment.utc().format('ddd, DD MMM YYYY HH:mm:ss')} GMT`
     const authCode = generateAuthorization('/vrageremote/v1/session/gamechat', date, process.env.MEDIEVAL_API_KEY)
 
     return fetch(`http://${process.env.MEDIEVAL_DS_ADDRESS}:${process.env.MEDIEVAL_API_PORT}/vrageremote/v1/session/gamechat`, {
@@ -38,9 +38,9 @@ const getAllChat = () => {
     });
 }
 
-const sendChat = (chat) => {
+const sendChat = async chat => {
 
-    const date = `${moment().format('ddd, DD MMM YYYY HH:mm:ss')} GMT`
+    const date = `${moment.utc().format('ddd, DD MMM YYYY HH:mm:ss')} GMT`
     const authCode = generateAuthorization('/vrageremote/v1/session/gamechat', date, process.env.MEDIEVAL_API_KEY)
 
     const data = JSON.stringify({
@@ -62,4 +62,4 @@ const sendChat = (chat) => {
 
 }
 
-module.exports = [getChat, getAllChat, sendChat];
+module.exports = { getChat, getAllChat, sendChat };
