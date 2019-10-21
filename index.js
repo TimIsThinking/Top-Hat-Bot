@@ -20,13 +20,21 @@ const factions = require('./src/commands/factions')
 const checkIfAdmin = require('./src/middleware/authorization')
 const [createServer, listServers] = require('./src/commands/servers')
 
-mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
+connectToDB = () => {
+	mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
 
-const db = mongoose.connection
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log('Connected to DB!')
-});
+	const db = mongoose.connection;
+	db.on('error', () => {
+		console.error.bind(console, 'connection error:')
+		console.log('Reconnecting in 60 seconds');
+		setTimeout(connectToDB, 60000);
+	});
+	db.once('open', function() {
+		console.log('Connected to DB!')
+	});
+}
+
+connectToDB();
 
 const bot = new Discord.Client()
 
@@ -90,9 +98,9 @@ bot.on('message', msg => {
 		checkIfAdmin(poll(bot, msg, args))
   }
     
-  // else if (command === 'chat') {
-	// 	checkIfAdmin(msg, () => chat(msg, args))
-  // }
+  else if (command === 'chat') {
+		checkIfAdmin(msg, () => chat(msg, args))
+	}
     
   else if (command === 'claims') {
 		checkIfAdmin(msg, () => claims(msg, args))
@@ -106,7 +114,7 @@ bot.on('message', msg => {
 	// 	checkClaims(bot, msg, args)
   // }
 
-  // else if (command === 'getClaims') {
+  // else if (command === 'getclaims') {
 	// 	checkIfAdmin(msg, () => getClaims(msg, args))
 	// }
 	

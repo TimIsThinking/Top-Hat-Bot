@@ -32,9 +32,9 @@ getServer = id => {
 }
 
 getServerByName = name => {
-    return Server.findOne({ name: name }, (err, server) => {
+    return Server.findOne({ name: new RegExp(`^${name}$`, 'i')  }, (err, server) => {
         if (err) return {
-          message: "Error finding server"
+            message: "Error finding server"
         };
 
         return server;

@@ -1,4 +1,4 @@
-const suggest = (msg, args) => {
+const suggest = async (msg, args) => {
     if (args < 1) {
         msg.reply(`Suggestion cannot be empty, usage: !suggest <SUGGESTION>`)
         return

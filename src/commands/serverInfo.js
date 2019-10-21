@@ -3,7 +3,7 @@ const topHatEngineersConfig = require('../requests/gamedig/topHatEngineers')
 const {getServer} = require('../requests/vrageApi/server')
 const {getServerByName} = require('../../api/controllers/server')
 
-const serverInfo = (msg, args) => {
+const serverInfo = async (msg, args) => {
     msg.react("🎩")
     msg.channel.startTyping();
 
@@ -14,14 +14,10 @@ const serverInfo = (msg, args) => {
     //     console.log(data)
     // })
 
-    getServerByName(args.join(' '))
-    .then(server => {
-        console.log('server', server)
-        return server
-    })
-    .then(server => {
+    const server = await getServerByName(args.join(' '))
+    if (server) {
         gamedig({
-                type: 'medievalengineers',
+                type: server.game.toLowerCase().replace(/\s/g, ""),
                 host: server.address,
                 port: server.port
             },
@@ -85,10 +81,11 @@ const serverInfo = (msg, args) => {
                 })
             }
         )
-    })
-    
+    } else {
+        msg.channel.send('I could not find a server with that name!');
+    } 
 
     msg.channel.stopTyping();
 }
 
-module.exports = serverInfo
+module.exports = serverInfo;

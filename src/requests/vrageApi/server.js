@@ -7,7 +7,7 @@ const fetch = require('node-fetch')
 
 // Claims
 
-const getServer = () => {
+const getServer = async () => {
 
     return fetch(`http://${process.env.MEDIEVAL_DS_ADDRESS}:${process.env.MEDIEVAL_API_PORT}/vrageremote/v1/server`, {
         method: 'GET',
