@@ -23,7 +23,7 @@
     "gamedig": "^1.0.47",
     "moment": "^2.24.0",
     "mongoose": "^5.4.16",
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"
